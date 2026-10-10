@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#effaff">
+<title>AI Study Notes Generator | Free Tools Zone</title>
+<meta name="description" content="Turn lesson text into organized study notes, key points, definitions and revision questions with the AI Study Notes Generator.">
+<style>
+:root{--blue:#1687e8;--green:#19a875;--ink:#18344b;--muted:#607587;--border:#dceaf1}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:linear-gradient(135deg,#effaff,#effcf5);line-height:1.6}
+header{text-align:center;padding:30px 16px 22px}
+.logo{font-size:12px;font-weight:800;letter-spacing:2px;color:var(--blue)}
+h1{font-size:clamp(28px,5vw,42px);line-height:1.2;margin:12px 0}
+.gradient{background:linear-gradient(90deg,var(--blue),var(--green));color:transparent;background-clip:text}
+header p{max-width:660px;margin:10px auto;color:var(--muted)}
+main{max-width:1000px;margin:auto;padding:12px 16px 36px}
+.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 8px 28px #164e630c}
+h2{font-size:20px;margin:0 0 14px}
+label{display:block;font-weight:700;font-size:14px;margin:13px 0 6px}
+textarea,select{width:100%;padding:13px;border:1px solid #cbdde8;border-radius:11px;background:#fff;color:var(--ink);font:inherit;font-size:15px;outline:none}
+textarea{min-height:230px;resize:vertical}
+textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1687e81b}
+.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+button{border:0;border-radius:10px;padding:12px 17px;font-size:14px;font-weight:700;cursor:pointer;min-height:44px}
+button:disabled{opacity:.6;cursor:not-allowed}
+.primary{background:linear-gradient(100deg,var(--blue),var(--green));color:#fff;flex:1}
+.secondary{background:#edf7ff;color:#1768a5;border:1px solid #d4eafa}
+.small{font-size:13px;color:var(--muted)}
+.counter{text-align:right;font-size:12px;color:var(--muted);margin-top:5px}
+.status{display:none;margin-top:14px;padding:12px;border-radius:10px;background:#f0f9ff;color:#27536c;overflow-wrap:anywhere}
+.status.error{background:#fff1f0;color:#a52d28}
+.status.success{background:#effcf5;color:#14734f}
+.result{white-space:pre-wrap;overflow-wrap:anywhere;min-height:180px;padding:16px;background:#f6fbfd;border:1px solid var(--border);border-radius:12px}
+.result:empty:before{content:"Your study notes will appear here.";color:#8a9ba8}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:10px 16px 28px}
+@media(max-width:600px){.row{grid-template-columns:1fr}.card{padding:16px}.tools button{width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">FREE TOOLS ZONE</div>
+  <h1>AI <span class="gradient">Study Notes Generator</span></h1>
+  <p>Turn your lessons into clear, organized study notes and revision questions in seconds.</p>
+</header>
+
+<main>
+<section class="card">
+  <h2>📚 Create Your Study Notes</h2>
+  <label for="lesson">Lesson text or topic</label>
+  <textarea id="lesson" maxlength="20000" placeholder="Paste your lesson, textbook extract, or class notes here..."></textarea>
+  <div class="counter"><span id="inputWords">0</span> words · <span id="chars">0</span>/20,000 characters</div>
+
+  <div class="row">
+    <div>
+      <label for="level">Education level</label>
+      <select id="level">
+        <option>A/L student</option>
+        <option>O/L student</option>
+        <option>Diploma</option>
+        <option>Undergraduate</option>
+        <option>Postgraduate</option>
+        <option>General learning</option>
+      </select>
+    </div>
+    <div>
+      <label for="style">Notes format</label>
+      <select id="style">
+        <option value="Structured bullet-point notes">Structured bullet-point notes</option>
+        <option value="Detailed study notes">Detailed study notes</option>
+        <option value="Short revision notes">Short revision notes</option>
+        <option value="Exam-focused notes">Exam-focused notes</option>
+      </select>
+    </div>
+    <div>
+      <label for="language">Output language</label>
+      <select id="language">
+        <option>English</option>
+        <option>Sinhala</option>
+        <option>Tamil</option>
+      </select>
+    </div>
+    <div>
+      <label for="questions">Revision questions</label>
+      <select id="questions">
+        <option value="5">5 questions</option>
+        <option value="10">10 questions</option>
+        <option value="15">15 questions</option>
+        <option value="0">No questions</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="tools">
+    <button class="primary" id="generate">✨ Generate Study Notes</button>
+    <button class="secondary" id="clear">Clear</button>
+  </div>
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+  <p class="small">For best results, paste lesson text with enough detail. Always check important facts against your study materials.</p>
+</section>
+
+<section class="card">
+  <h2>📝 Your Study Notes</h2>
+  <div id="result" class="result" aria-live="polite"></div>
+  <div class="counter"><span id="outputWords">0</span> words</div>
+  <div class="tools">
+    <button class="secondary" id="copy">📋 Copy Notes</button>
+    <button class="secondary" id="download">⬇ Download TXT</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>How to Use</h2>
+  <ol>
+    <li>Paste your lesson or study material.</li>
+    <li>Select your education level and notes format.</li>
+    <li>Choose a language and number of revision questions.</li>
+    <li>Click Generate Study Notes.</li>
+    <li>Copy or download your notes for revision.</li>
+  </ol>
+  <p class="small">AI may omit details or make mistakes. Review generated notes before an exam.</p>
+</section>
+</main>
+
+<footer>© Free Tools Zone · Free online student tools</footer>
+
+<script>
+const API_URL = "https://ftz-ai-api.snxbro1.workers.dev/";
+const $ = id => document.getElementById(id);
+const lesson = $("lesson");
+const result = $("result");
+const statusBox = $("status");
+const generateBtn = $("generate");
+
+function countWords(text){
+  const s = text.trim();
+  return s ? s.split(/\s+/).length : 0;
+}
+function updateCounts(){
+  $("inputWords").textContent = countWords(lesson.value);
+  $("chars").textContent = lesson.value.length;
+  $("outputWords").textContent = countWords(result.textContent);
+}
+lesson.addEventListener("input",updateCounts);
+
+function showStatus(message,type=""){
+  statusBox.textContent=message;
+  statusBox.className="status"+(type?" "+type:"");
+  statusBox.style.display="block";
+}
+
+generateBtn.addEventListener("click",async()=>{
+  const source=lesson.value.trim();
+  if(!source){
+    showStatus("Please paste your lesson text or enter a topic first.","error");
+    lesson.focus();
+    return;
+  }
+  if(source.length<30){
+    showStatus("Please enter a little more lesson text for better notes.","error");
+    return;
+  }
+
+  generateBtn.disabled=true;
+  generateBtn.textContent="⏳ Generating...";
+  result.textContent="";
+  showStatus("Creating your study notes. Please wait.");
+
+  try{
+    const response=await fetch(API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        mode:"study_notes",
+        lesson:source,
+        educationLevel:$("level").value,
+        notesStyle:$("style").value,
+        language:$("language").value,
+        questionCount:Number($("questions").value)
+      })
+    });
+
+    let data;
+    try{data=await response.json();}
+    catch{throw new Error("The server returned an unreadable response. Please try again.");}
+
+    if(!response.ok||data.success===false){
+      throw new Error(data.error||"Could not generate notes. Please try again.");
+    }
+
+    const notes=data.notes||data.text||data.result||"";
+    if(typeof notes!=="string"||!notes.trim()){
+      throw new Error("The server returned empty notes. Check the Worker configuration.");
+    }
+
+    result.textContent=notes.trim();
+    updateCounts();
+    showStatus("Study notes generated successfully! Review them before studying.","success");
+  }catch(error){
+    showStatus(error.message||"Connection failed. Please try again later.","error");
+  }finally{
+    generateBtn.disabled=false;
+    generateBtn.textContent="✨ Generate Study Notes";
+  }
+});
+
+$("clear").addEventListener("click",()=>{
+  lesson.value="";
+  result.textContent="";
+  statusBox.style.display="none";
+  updateCounts();
+});
+
+$("copy").addEventListener("click",async()=>{
+  const text=result.textContent.trim();
+  if(!text){showStatus("Generate your notes before copying.","error");return;}
+  try{
+    await navigator.clipboard.writeText(text);
+    showStatus("Notes copied successfully!","success");
+  }catch{
+    showStatus("Copy unavailable. Select the notes and copy them manually.","error");
+  }
+});
+
+$("download").addEventListener("click",()=>{
+  const text=result.textContent.trim();
+  if(!text){showStatus("Generate your notes before downloading.","error");return;}
+  const blob=new Blob([text],{type:"text/plain;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="study-notes.txt";
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+
+updateCounts();
+</script>
+</body>
+</html>
