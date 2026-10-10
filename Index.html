@@ -3,241 +3,533 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#effaff">
-<title>AI Study Notes Generator | Free Tools Zone</title>
-<meta name="description" content="Turn lesson text into organized study notes, key points, definitions and revision questions with the AI Study Notes Generator.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#eaf7ff">
+<title>Free AI Study Notes Generator | Free Tools Zone</title>
+<meta name="description" content="Create clear study notes, summaries, key points and revision questions from your lessons with this free AI Study Notes Generator.">
+
 <style>
-:root{--blue:#1687e8;--green:#19a875;--ink:#18344b;--muted:#607587;--border:#dceaf1}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:linear-gradient(135deg,#effaff,#effcf5);line-height:1.6}
-header{text-align:center;padding:30px 16px 22px}
-.logo{font-size:12px;font-weight:800;letter-spacing:2px;color:var(--blue)}
-h1{font-size:clamp(28px,5vw,42px);line-height:1.2;margin:12px 0}
-.gradient{background:linear-gradient(90deg,var(--blue),var(--green));color:transparent;background-clip:text}
-header p{max-width:660px;margin:10px auto;color:var(--muted)}
-main{max-width:1000px;margin:auto;padding:12px 16px 36px}
-.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:18px;box-shadow:0 8px 28px #164e630c}
-h2{font-size:20px;margin:0 0 14px}
-label{display:block;font-weight:700;font-size:14px;margin:13px 0 6px}
-textarea,select{width:100%;padding:13px;border:1px solid #cbdde8;border-radius:11px;background:#fff;color:var(--ink);font:inherit;font-size:15px;outline:none}
-textarea{min-height:230px;resize:vertical}
-textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1687e81b}
-.row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-button{border:0;border-radius:10px;padding:12px 17px;font-size:14px;font-weight:700;cursor:pointer;min-height:44px}
-button:disabled{opacity:.6;cursor:not-allowed}
-.primary{background:linear-gradient(100deg,var(--blue),var(--green));color:#fff;flex:1}
-.secondary{background:#edf7ff;color:#1768a5;border:1px solid #d4eafa}
-.small{font-size:13px;color:var(--muted)}
-.counter{text-align:right;font-size:12px;color:var(--muted);margin-top:5px}
-.status{display:none;margin-top:14px;padding:12px;border-radius:10px;background:#f0f9ff;color:#27536c;overflow-wrap:anywhere}
-.status.error{background:#fff1f0;color:#a52d28}
-.status.success{background:#effcf5;color:#14734f}
-.result{white-space:pre-wrap;overflow-wrap:anywhere;min-height:180px;padding:16px;background:#f6fbfd;border:1px solid var(--border);border-radius:12px}
-.result:empty:before{content:"Your study notes will appear here.";color:#8a9ba8}
-footer{text-align:center;color:var(--muted);font-size:13px;padding:10px 16px 28px}
-@media(max-width:600px){.row{grid-template-columns:1fr}.card{padding:16px}.tools button{width:100%}}
+:root {
+  --blue: #2588e8;
+  --blue-dark: #1767b5;
+  --green: #23ad80;
+  --ink: #18364b;
+  --muted: #647b8b;
+  --line: #dceaf1;
+  --white: #ffffff;
+  --bg: #f2faff;
+  --danger: #b42335;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(145deg, #edf8ff 0%, #f5fff9 100%);
+  line-height: 1.6;
+}
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+.container {
+  width: min(100% - 28px, 1050px);
+  margin: 0 auto;
+}
+.hero {
+  padding: 36px 16px 28px;
+  text-align: center;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border: 1px solid #d5eaf8;
+  border-radius: 50px;
+  background: #fff;
+  color: var(--blue-dark);
+  font-weight: 800;
+  font-size: 13px;
+}
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 8px;
+  color: white;
+  background: linear-gradient(135deg, var(--blue), var(--green));
+}
+h1 {
+  margin: 18px 0 10px;
+  font-size: clamp(30px, 5vw, 46px);
+  line-height: 1.13;
+  letter-spacing: -1.4px;
+}
+.gradient-text {
+  color: var(--blue);
+}
+.hero p {
+  max-width: 660px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 16px;
+}
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+.pill {
+  padding: 6px 11px;
+  border-radius: 30px;
+  background: #e1f7ed;
+  color: #187d5a;
+  font-size: 12px;
+  font-weight: 700;
+}
+.panel {
+  margin: 0 auto 24px;
+  padding: clamp(17px, 4vw, 30px);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: 0 12px 38px rgba(34, 93, 128, .07);
+}
+.section-heading {
+  margin: 0 0 5px;
+  font-size: 21px;
+}
+.subheading {
+  margin: 0 0 21px;
+  color: var(--muted);
+  font-size: 14px;
+}
+label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 750;
+  font-size: 14px;
+}
+textarea, select {
+  display: block;
+  width: 100%;
+  color: var(--ink);
+  background: #fbfdff;
+  border: 1px solid #d6e5ed;
+  border-radius: 12px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+textarea {
+  min-height: 220px;
+  padding: 14px;
+  resize: vertical;
+}
+select {
+  min-height: 46px;
+  padding: 10px;
+}
+textarea:focus, select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37,136,232,.12);
+}
+.field { margin-bottom: 19px; }
+.hint, .counter {
+  color: var(--muted);
+  font-size: 12px;
+}
+.counter { text-align: right; margin-top: 5px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.btn {
+  min-height: 46px;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 11px;
+  font-weight: 750;
+  transition: transform .15s, opacity .15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+.primary {
+  flex: 1 1 220px;
+  color: white;
+  background: linear-gradient(100deg, #2588e8, #20b58b);
+  box-shadow: 0 5px 15px rgba(37,136,232,.16);
+}
+.secondary {
+  color: #285a77;
+  background: #edf7fc;
+  border: 1px solid #dbeaf2;
+}
+.green-btn {
+  color: #187d5a;
+  background: #e4f8ef;
+  border: 1px solid #cceede;
+}
+.status {
+  display: none;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border-radius: 11px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.status.show { display: block; }
+.status.info { background: #edf7ff; color: #175e99; }
+.status.error { background: #fff0f1; color: var(--danger); }
+.status.success { background: #e8faf1; color: #18754f; }
+.result-panel { display: none; }
+.result-panel.show { display: block; }
+.result-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.result-text {
+  min-height: 180px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #fbfdff;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+.result-meta {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 9px;
+}
+.tips {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+  margin: 24px 0;
+}
+.tip {
+  padding: 17px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255,255,255,.8);
+}
+.tip strong { display: block; margin-bottom: 5px; }
+.tip p { margin: 0; color: var(--muted); font-size: 13px; }
+footer {
+  padding: 20px 10px 32px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+footer a { color: var(--blue-dark); text-decoration: none; }
+@media (max-width: 600px) {
+  .grid, .tips { grid-template-columns: 1fr; }
+  .hero { padding-top: 26px; }
+  .actions .btn { width: 100%; }
+  .panel { border-radius: 16px; }
+}
 </style>
 </head>
+
 <body>
-<header>
-  <div class="logo">FREE TOOLS ZONE</div>
-  <h1>AI <span class="gradient">Study Notes Generator</span></h1>
-  <p>Turn your lessons into clear, organized study notes and revision questions in seconds.</p>
+<header class="hero container">
+  <div class="brand">
+    <span class="brand-icon">✦</span>
+    FREE TOOLS ZONE
+  </div>
+  <h1><span class="gradient-text">AI Study Notes</span><br>Generator</h1>
+  <p>Turn your lessons into clear, organized study notes, key points and revision questions in seconds.</p>
+  <div class="pills">
+    <span class="pill">✓ Free to use</span>
+    <span class="pill">✓ Revision ready</span>
+    <span class="pill">✓ Download notes</span>
+  </div>
 </header>
 
-<main>
-<section class="card">
-  <h2>📚 Create Your Study Notes</h2>
-  <label for="lesson">Lesson text or topic</label>
-  <textarea id="lesson" maxlength="20000" placeholder="Paste your lesson, textbook extract, or class notes here..."></textarea>
-  <div class="counter"><span id="inputWords">0</span> words · <span id="chars">0</span>/20,000 characters</div>
+<main class="container">
+  <section class="panel">
+    <h2 class="section-heading">Create Your Study Notes</h2>
+    <p class="subheading">Paste your lesson or study material below to get started.</p>
 
-  <div class="row">
-    <div>
-      <label for="level">Education level</label>
-      <select id="level">
-        <option>A/L student</option>
-        <option>O/L student</option>
-        <option>Diploma</option>
-        <option>Undergraduate</option>
-        <option>Postgraduate</option>
-        <option>General learning</option>
-      </select>
-    </div>
-    <div>
-      <label for="style">Notes format</label>
-      <select id="style">
-        <option value="Structured bullet-point notes">Structured bullet-point notes</option>
-        <option value="Detailed study notes">Detailed study notes</option>
-        <option value="Short revision notes">Short revision notes</option>
-        <option value="Exam-focused notes">Exam-focused notes</option>
-      </select>
-    </div>
-    <div>
-      <label for="language">Output language</label>
-      <select id="language">
-        <option>English</option>
-        <option>Sinhala</option>
-        <option>Tamil</option>
-      </select>
-    </div>
-    <div>
-      <label for="questions">Revision questions</label>
-      <select id="questions">
-        <option value="5">5 questions</option>
-        <option value="10">10 questions</option>
-        <option value="15">15 questions</option>
-        <option value="0">No questions</option>
-      </select>
-    </div>
-  </div>
+    <form id="notesForm">
+      <div class="field">
+        <label for="lesson">Lesson or study material</label>
+        <textarea id="lesson" maxlength="20000"
+          placeholder="Paste your lesson, textbook notes, or study material here..."
+          required></textarea>
+        <div class="counter"><span id="charCount">0</span> / 20,000 characters</div>
+      </div>
 
-  <div class="tools">
-    <button class="primary" id="generate">✨ Generate Study Notes</button>
-    <button class="secondary" id="clear">Clear</button>
-  </div>
-  <div id="status" class="status" role="status" aria-live="polite"></div>
-  <p class="small">For best results, paste lesson text with enough detail. Always check important facts against your study materials.</p>
-</section>
+      <div class="grid">
+        <div class="field">
+          <label for="level">Education level</label>
+          <select id="level">
+            <option value="School">School</option>
+            <option value="A/L">A/L</option>
+            <option value="Diploma">Diploma</option>
+            <option value="University">University</option>
+            <option value="General learning">General learning</option>
+          </select>
+        </div>
 
-<section class="card">
-  <h2>📝 Your Study Notes</h2>
-  <div id="result" class="result" aria-live="polite"></div>
-  <div class="counter"><span id="outputWords">0</span> words</div>
-  <div class="tools">
-    <button class="secondary" id="copy">📋 Copy Notes</button>
-    <button class="secondary" id="download">⬇ Download TXT</button>
-  </div>
-</section>
+        <div class="field">
+          <label for="style">Notes style</label>
+          <select id="style">
+            <option value="Balanced">Balanced study notes</option>
+            <option value="Short summary">Short summary</option>
+            <option value="Detailed">Detailed notes</option>
+            <option value="Exam revision">Exam revision notes</option>
+            <option value="Bullet points">Bullet points</option>
+          </select>
+        </div>
 
-<section class="card">
-  <h2>How to Use</h2>
-  <ol>
-    <li>Paste your lesson or study material.</li>
-    <li>Select your education level and notes format.</li>
-    <li>Choose a language and number of revision questions.</li>
-    <li>Click Generate Study Notes.</li>
-    <li>Copy or download your notes for revision.</li>
-  </ol>
-  <p class="small">AI may omit details or make mistakes. Review generated notes before an exam.</p>
-</section>
+        <div class="field">
+          <label for="language">Output language</label>
+          <select id="language">
+            <option value="English">English</option>
+            <option value="Sinhala">Sinhala</option>
+            <option value="Tamil">Tamil</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="questions">Revision questions</label>
+          <select id="questions">
+            <option value="0">No questions</option>
+            <option value="5" selected>5 questions</option>
+            <option value="10">10 questions</option>
+            <option value="15">15 questions</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn primary" id="generateBtn">
+          ✨ Generate Study Notes
+        </button>
+        <button type="button" class="btn secondary" id="clearBtn">Clear</button>
+      </div>
+
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <section id="resultPanel" class="panel result-panel">
+    <div class="result-top">
+      <div>
+        <h2 class="section-heading">Your Study Notes</h2>
+        <div class="result-meta" id="resultMeta">Generated notes</div>
+      </div>
+      <div class="actions" style="margin-top:0">
+        <button type="button" class="btn green-btn" id="copyBtn">Copy Notes</button>
+        <button type="button" class="btn secondary" id="downloadBtn">Download TXT</button>
+      </div>
+    </div>
+    <div id="resultText" class="result-text"></div>
+    <div class="result-meta" id="wordCount"></div>
+  </section>
+
+  <section class="tips">
+    <div class="tip">
+      <strong>📚 Clear summaries</strong>
+      <p>Organize long lessons into easier-to-review notes.</p>
+    </div>
+    <div class="tip">
+      <strong>🎯 Exam preparation</strong>
+      <p>Focus on key concepts and important facts.</p>
+    </div>
+    <div class="tip">
+      <strong>📝 Revision practice</strong>
+      <p>Generate questions to test your understanding.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Free Tools Zone · Free online study tool</p>
+    <p>Always verify important facts with your textbooks and class materials.</p>
+  </footer>
 </main>
 
-<footer>© Free Tools Zone · Free online student tools</footer>
-
 <script>
-const API_URL = "https://ftz-ai-api.snxbro1.workers.dev/";
-const $ = id => document.getElementById(id);
-const lesson = $("lesson");
-const result = $("result");
-const statusBox = $("status");
-const generateBtn = $("generate");
+(() => {
+  "use strict";
 
-function countWords(text){
-  const s = text.trim();
-  return s ? s.split(/\s+/).length : 0;
-}
-function updateCounts(){
-  $("inputWords").textContent = countWords(lesson.value);
-  $("chars").textContent = lesson.value.length;
-  $("outputWords").textContent = countWords(result.textContent);
-}
-lesson.addEventListener("input",updateCounts);
+  const API_URL = "https://ftz-ai-api.snxbro1.workers.dev/";
 
-function showStatus(message,type=""){
-  statusBox.textContent=message;
-  statusBox.className="status"+(type?" "+type:"");
-  statusBox.style.display="block";
-}
+  const $ = id => document.getElementById(id);
+  const form = $("notesForm");
+  const lesson = $("lesson");
+  const generateBtn = $("generateBtn");
+  const statusBox = $("status");
+  const resultPanel = $("resultPanel");
+  const resultText = $("resultText");
 
-generateBtn.addEventListener("click",async()=>{
-  const source=lesson.value.trim();
-  if(!source){
-    showStatus("Please paste your lesson text or enter a topic first.","error");
+  let latestNotes = "";
+
+  function showStatus(message, type = "info") {
+    statusBox.textContent = message;
+    statusBox.className = "status show " + type;
+  }
+
+  function setLoading(loading) {
+    generateBtn.disabled = loading;
+    generateBtn.textContent = loading
+      ? "⏳ Generating notes..."
+      : "✨ Generate Study Notes";
+  }
+
+  function countWords(text) {
+    const trimmed = text.trim();
+    return trimmed ? trimmed.split(/\s+/).length : 0;
+  }
+
+  lesson.addEventListener("input", () => {
+    $("charCount").textContent = lesson.value.length;
+  });
+
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const source = lesson.value.trim();
+
+    if (!source) {
+      showStatus("Please paste your lesson or study material first.", "error");
+      lesson.focus();
+      return;
+    }
+
+    if (source.length < 20) {
+      showStatus("Please enter a little more study material.", "error");
+      lesson.focus();
+      return;
+    }
+
+    setLoading(true);
+    showStatus("Your study notes are being prepared. Please wait.", "info");
+
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mode: "study_notes",
+          lesson: source,
+          educationLevel: $("level").value,
+          notesStyle: $("style").value,
+          language: $("language").value,
+          questionCount: Number($("questions").value)
+        })
+      });
+
+      const raw = await response.text();
+      let data;
+
+      try {
+        data = JSON.parse(raw);
+      } catch {
+        throw new Error(
+          "The server returned an unexpected response. Please check the Cloudflare Worker."
+        );
+      }
+
+      if (!response.ok || data.success === false || data.error) {
+        throw new Error(
+          data.error || data.message ||
+          ("Server error (" + response.status + "). Please try again.")
+        );
+      }
+
+      const notes = data.notes || data.text || data.result || data.output;
+
+      if (typeof notes !== "string" || !notes.trim()) {
+        throw new Error(
+          "The server did not return study notes. The Cloudflare Worker may not support study_notes mode yet."
+        );
+      }
+
+      latestNotes = notes.trim();
+      resultText.textContent = latestNotes;
+      $("resultMeta").textContent =
+        $("level").value + " · " + $("style").value;
+      $("wordCount").textContent =
+        "Approx. " + countWords(latestNotes).toLocaleString() + " words";
+
+      resultPanel.classList.add("show");
+      showStatus("Study notes generated successfully!", "success");
+      resultPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    } catch (error) {
+      console.error("Study Notes error:", error);
+
+      let message = error.message || "An unexpected error occurred.";
+
+      if (error instanceof TypeError) {
+        message = "Could not connect to the server. Check your internet connection and Cloudflare Worker settings.";
+      }
+
+      showStatus(message, "error");
+    } finally {
+      setLoading(false);
+    }
+  });
+
+  $("clearBtn").addEventListener("click", () => {
+    lesson.value = "";
+    $("charCount").textContent = "0";
+    resultPanel.classList.remove("show");
+    resultText.textContent = "";
+    latestNotes = "";
+    statusBox.className = "status";
     lesson.focus();
-    return;
-  }
-  if(source.length<30){
-    showStatus("Please enter a little more lesson text for better notes.","error");
-    return;
-  }
+  });
 
-  generateBtn.disabled=true;
-  generateBtn.textContent="⏳ Generating...";
-  result.textContent="";
-  showStatus("Creating your study notes. Please wait.");
+  $("copyBtn").addEventListener("click", async () => {
+    if (!latestNotes) return;
 
-  try{
-    const response=await fetch(API_URL,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        mode:"study_notes",
-        lesson:source,
-        educationLevel:$("level").value,
-        notesStyle:$("style").value,
-        language:$("language").value,
-        questionCount:Number($("questions").value)
-      })
+    try {
+      await navigator.clipboard.writeText(latestNotes);
+      showStatus("Notes copied successfully!", "success");
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(resultText);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      showStatus("Select the highlighted notes and copy them manually.", "info");
+    }
+  });
+
+  $("downloadBtn").addEventListener("click", () => {
+    if (!latestNotes) return;
+
+    const blob = new Blob([latestNotes], {
+      type: "text/plain;charset=utf-8"
     });
 
-    let data;
-    try{data=await response.json();}
-    catch{throw new Error("The server returned an unreadable response. Please try again.");}
-
-    if(!response.ok||data.success===false){
-      throw new Error(data.error||"Could not generate notes. Please try again.");
-    }
-
-    const notes=data.notes||data.text||data.result||"";
-    if(typeof notes!=="string"||!notes.trim()){
-      throw new Error("The server returned empty notes. Check the Worker configuration.");
-    }
-
-    result.textContent=notes.trim();
-    updateCounts();
-    showStatus("Study notes generated successfully! Review them before studying.","success");
-  }catch(error){
-    showStatus(error.message||"Connection failed. Please try again later.","error");
-  }finally{
-    generateBtn.disabled=false;
-    generateBtn.textContent="✨ Generate Study Notes";
-  }
-});
-
-$("clear").addEventListener("click",()=>{
-  lesson.value="";
-  result.textContent="";
-  statusBox.style.display="none";
-  updateCounts();
-});
-
-$("copy").addEventListener("click",async()=>{
-  const text=result.textContent.trim();
-  if(!text){showStatus("Generate your notes before copying.","error");return;}
-  try{
-    await navigator.clipboard.writeText(text);
-    showStatus("Notes copied successfully!","success");
-  }catch{
-    showStatus("Copy unavailable. Select the notes and copy them manually.","error");
-  }
-});
-
-$("download").addEventListener("click",()=>{
-  const text=result.textContent.trim();
-  if(!text){showStatus("Generate your notes before downloading.","error");return;}
-  const blob=new Blob([text],{type:"text/plain;charset=utf-8"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download="study-notes.txt";
-  a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-});
-
-updateCounts();
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "study-notes.txt";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  });
+})();
 </script>
 </body>
 </html>
